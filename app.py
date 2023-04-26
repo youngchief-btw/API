@@ -14,11 +14,6 @@ app = Quart(__name__)
 async def root():
     return ''
 
-
-@app.route('/ping')
-async def ping():
-    return 441
-
 @app.route('/spotify')
 async def slashSpotify():
     return await now()
