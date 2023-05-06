@@ -1,0 +1,11 @@
+This project is quad-licensed under various public domain dedications in the following order: 
+
+- Unlicense: Located in the file `UNLICENSE`
+
+- WTFPL: Located in the file `WTFPL.txt`
+
+- BOLA: Located in the file `BOLA.txt`
+
+- CC0: Located in the file `CC0.txt`
+
+In jurisdictions where the term "public domain" is undefined or otherwise not recognized, please refer to the "Public Domain Fallback" section in `CC0.txt`
