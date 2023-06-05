@@ -4,7 +4,7 @@ sys.path.insert(0, currentdir)
 import auth
 import sqlite as sql
 import json
-async def nowPlaying():
+async def now():
     global spotifyAccessToken
     global spotifyRefreshToken
     spotifyAccessToken = None
@@ -12,7 +12,7 @@ async def nowPlaying():
         spotifyAccessToken = await auth.refreshAccessToken()
         if spotifyAccessToken is None:
             return {'error': 'Access token not found'}
-    
+
     headers = {'Authorization': 'Bearer ' + spotifyAccessToken}
     async with aiohttp.ClientSession(headers=headers) as session:
         async with session.get('https://api.spotify.com/v1/me/player') as resp:

@@ -1,33 +1,44 @@
-import json
-import os
-from markupsafe import escape
 from quart import Quart, request
-from music.spotify.nowPlaying import nowPlaying as now
-from music.spotify.queue import queue as queue
-from music.spotify.history import history as history
+from music.spotify.now import now
+from music.spotify.future import future
+from music.spotify.next import next
+from music.spotify.past import past
+from music.spotify.previous import previous
 from music.spotify.callback import callback as cb
 
 app = Quart(__name__)
-
 
 @app.route('/')
 async def root():
     return ''
 
-@app.route('/spotify')
-async def slashSpotify():
-    return await now()
+# @app.route('/spotify')
+# async def slashSpotify():
+#     return await now()
   
-@app.route('/spotify/queue')
-async def slashSpotifyQueue():
-    return await queue()
+@app.route('/spotify/future')
+async def slashSpotifyFuture():
+    return await future()
 
-@app.route('/spotify/history')
-async def slashSpotifyHistory():
-    return await history()
+@app.route('/spotify/past')
+async def slashSpotifyPast():
+    return await past()
 
 @app.route('/spotify/callback')
 async def slashSpotifyCallback():
     return await cb(request)
+
+@app.route('/spotify/now')
+async def slashSpotifyNow():
+    return await now()
+
+@app.route('/spotify/next')
+async def slashSpotifyNext():
+    return await next()
+
+@app.route('/spotify/previous')
+async def slashSpotifyPrevious():
+    return await previous()
+
 
 app.run(host='0.0.0.0', port=8080)
