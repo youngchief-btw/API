@@ -7,7 +7,9 @@ from music.spotify.past import past as spotifyPast
 from music.spotify.previous import previous as spotifyPrevious
 from music.spotify.callback import callback as spotifyCallback
 # Apple Music Imports
-from music.apple.past import past as appleMusicPast
+# from music.apple.past import past as appleMusicPast
+import os
+env = os.environ
 
 app = Quart(__name__)
 
@@ -24,7 +26,7 @@ async def slashSpotifyFuture():
     return await spotifyFuture()
 
 @app.route('/spotify/past')
-async def slashSpotifyPast():  # pylint hates all of these, lol
+async def slashSpotifyPast():
     return await spotifyPast()
 
 @app.route('/spotify/callback')
@@ -43,8 +45,8 @@ async def slashSpotifyNext():
 async def slashSpotifyPrevious():
     return await spotifyPrevious()
 
-@app.route('/applemusic/past')
-async def slashAppleMusicPast():
-    return await appleMusicPast()
+# @app.route('/applemusic/past')
+# async def slashAppleMusicPast():
+#    return await appleMusicPast()
 
-app.run(host='0.0.0.0', port=8080)
+app.run(env['HOST'], port=int(env['PORT']))
