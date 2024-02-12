@@ -22,27 +22,6 @@ else:
     spotifyRefreshToken = None
 
 # Renew the access token with the refresh token
-#async def refreshAccessToken():
-#    global spotifyRefreshToken
-#    if not spotifyRefreshToken:
-#        return None
-#    auth_header = base64.b64encode(
-#        f"{spotifyClientId}:{spotifyClientSecret}".encode('utf-8')).decode('utf-8')
-#    data = {'grant_type': 'refresh_token', 'refresh_token': spotifyRefreshToken}
-#    headers = {
-#        'Content-Type': 'application/x-www-form-urlencoded',
-#        'Authorization': f'Basic {auth_header}'
-#    }
-#    async with aiohttp.ClientSession() as session:
-#        async with session.post('https://accounts.spotify.com/api/token',
-#                                data=data,
-#                                headers=headers) as response:
-#            response_data = await response.json()
-#            access = response_data.get('access_token')
-#            # Set access token in the database
-#            db_set('access_token', access)
-#            return access
-
 async def refreshAccessToken():
     global spotifyRefreshToken
     if not spotifyRefreshToken:

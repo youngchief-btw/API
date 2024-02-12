@@ -14,7 +14,7 @@ spotifyRedirectUri = env['SPOTIFY_REDIRECT_URI']
 spotifyUserId = env['SPOTIFY_USER_ID']
 spotifyAccessToken = None
 
-if db_get('refresh_token'):  # Use the get wrapper for retrieval
+if db_get('refresh_token'):
     spotifyRefreshToken = db_get('refresh_token')
 else:
     spotifyRefreshToken = None
@@ -48,11 +48,9 @@ async def callback(request):
                 headers = {'Authorization': 'Bearer ' + access_token}
                 async with session.get('https://api.spotify.com/v1/me', headers=headers) as response:
                     user_id = (await response.json()).get('id')
-
                     if user_id != spotifyUserId:
                         return {'error': 'Unauthorized'}
 
-                # Store the refresh token using db_set (original code)
                 db_set('refresh_token', refresh_token)
                 db_set('access_token', access_token)
                 return refresh_token
